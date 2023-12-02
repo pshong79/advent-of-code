@@ -18,7 +18,7 @@
 
 def read_input(filename)
   arr = File.readlines(filename)
-  
+
   return arr
 end
 
@@ -60,5 +60,5 @@ def calculate_total_sq_ft_of_wrapping_paper
 end
 
 
-## Run solution. Answer = 1795
+## Run solution. Answer = 1588178
 total_sq_ft_of_wrapping_paper = calculate_total_sq_ft_of_wrapping_paper
