@@ -56,9 +56,10 @@ def calculate_total_sq_ft_of_wrapping_paper
     wrapping_paper_per_present(total_surface_area, smallest_area)
   end
 
-  puts "total_sq_ft_of_wrapping_paper = #{total_sq_ft_of_wrapping_paper.sum}"
+  puts "Total square feet of wrapping paper needed = #{total_sq_ft_of_wrapping_paper.sum}"
+  total_sq_ft_of_wrapping_paper.sum
 end
 
 
 ## Run solution. Answer = 1588178
-total_sq_ft_of_wrapping_paper = calculate_total_sq_ft_of_wrapping_paper
+calculate_total_sq_ft_of_wrapping_paper
