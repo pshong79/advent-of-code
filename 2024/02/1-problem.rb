@@ -44,53 +44,47 @@
 
 ########### SOLUTION ###########
 
-# 1. Check if all numbers are ascending
-#    If ascending, safe_count + 1
-# 2. If not ascending, check if all numbers are descending
-#    If descending, safe_count + 1
-# 3. If ascending or descending, check difference between consecutive number <= 3 
-# 4. It not ascending or descending, do nothing
-
+# These functions each return an array of trues and falses
+# If any of the arrays contain a false, then it is not a "safe" report.
 def is_ascending(arr)
   asc = []
-  puts "arr: #{arr}"
   i = 0
 
   while i < (arr.length - 1)
     arr[i] < arr[i+1] ? asc.push(true) : asc.push(false)
     i +=1
   end
-  puts "asc: #{asc}"
+
+  asc
 end
 
 def is_descending(arr)
   desc = []
-  puts "arr: #{arr}"
   i = 0
 
   while i < (arr.length - 1)
     arr[i+1] < arr[i] ? desc.push(true) : desc.push(false)
     i +=1
   end
-  puts "desc: #{desc}"
+
+  desc
 end
 
 def difference(arr)
   diff = []
-  puts "arr: #{arr}"
   i = 0
 
   while i < (arr.length - 1)
     (arr[i+1] - arr[i]).abs <= 3 ? diff.push(true) : diff.push(false)
     i +=1
   end
-  puts "diff: #{diff}"
+
+  diff
 end
 
 
 levels = []
 int_levels = []
-difference = []
 safe_count = 0
 
 
@@ -98,39 +92,21 @@ safe_count = 0
 File.readlines('input.txt').each do |line|
   levels = line.split(' ')
   int_levels = levels.map { |l| l.to_i }
-  puts "levels: #{int_levels}"
 
-  puts levels.class
-  is_ascending(int_levels)
-  is_descending(int_levels)
-  difference(int_levels)
+  # if the difference array does not contains a false
+  unless difference(int_levels).include?(false)
 
-=begin
-  while index <= levels.length
-    (levels[index].to_i > levels[index-1].to_i) ? difference.push(true) : difference.push(false)
-    puts "difference1: #{difference}"
+    # if asc array contains a false
+    if is_ascending(int_levels).include?(false)
 
-    puts "difference.include?(false)1: #{difference.include?(false)}"
-    puts "safe_count1: #{safe_count}"
-    unless difference.include?(false) 
-      ((((levels[index].to_i - levels[index-1].to_i)) <= 3) && ((levels[index].to_i - levels[index-1].to_i) > 0)) ? difference.push(true) : difference.push(false)
-      puts "difference2: #{difference}"
-
-      puts "safe_count2: #{safe_count}"
-      puts "difference2.include?(false): #{difference.include?(false)}"
-      # unless difference.include?(false)
-      #   safe_count +=1
-      # end
+      # if the desc array does not contain a false
+      unless is_descending(int_levels).include?(false)
+        safe_count +=1
+      end
+    else
+      safe_count +=1
     end
-    # if difference.include?(false)
-    #   safe_count +=1
-    # end
-    index +=1
   end
-  safe_count +=1 unless difference.include?(false)
-  # levels.each_with_index do |level, index|
-  #   if level
-=end
 end
 
-# puts safe_count
+puts "safe_count = #{safe_count}"
